@@ -46,9 +46,9 @@ onstart:
                 needed_files= needed_files + [file] 
         for filename in needed_files:
             if not os.path.exists(filename):
-                raise FileNotFound(filename)
+                missing=filename
     except:
-        print("This file was not found %s" % FileNotFound)
+        print("This file was not found "+missing )
         sys.exit(1)
     else:
         print('/n All files are there, lets Go!')
