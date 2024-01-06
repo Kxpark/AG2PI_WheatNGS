@@ -1,0 +1,7 @@
+name: SRApull
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - sra-tools =3.0.9
+  - pigz =2.8

@@ -1,0 +1,6 @@
+name: VariantCallingSnakemakeEnv
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - snakemake-minimal >=7.3

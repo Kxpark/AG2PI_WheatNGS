@@ -1,0 +1,7 @@
+name: VCFprocessing
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - bcftools =1.15
+  - beagle =5.4

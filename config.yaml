@@ -1,0 +1,48 @@
+
+
+Workflow_Settings:
+  # Do you want to pull fastqs by using SRA-toolkit?
+  SRApull: FALSE
+ # Do you need to download/index your reference genome?
+  IndexReference: FALSE
+# Do you want to filter your variants after initial call?
+  VariantFiltering: TRUE
+  Homozygous: TRUE
+
+# If not using SRApull, please list your sample names.
+samples:
+  A: data/samples/A.
+  B: data/samples/B.
+  C: data/samples/C.
+
+Reference_Genome:
+  ref: data/ref/genome.fa
+  index: data/ref/genome
+  Url: https://urgi.versailles.inrae.fr/download/iwgsc/IWGSC_RefSeq_Assemblies/v2.1/iwgsc_refseqv2.1_assembly.fa.zip
+
+Population: WGS
+
+SRA:
+  SRR8255599: 'Plant'
+
+
+##########################
+# Tool Parameters
+##########################
+
+BWA-index:
+  threads: 56
+
+SRA-ToolKit:
+  max-size: 400g
+  threads: 11
+
+VCF_Filtering:
+  #what is the maximum %missing at any loci, put in .1 for 10% missing
+  Percent_Missing: [.2]
+  Minor_allele_frequency: 0.05
+  Minimum_Quality: 40
+
+
+Chromosomes: ['1A','1B','1D','2A','2B','2D','3A','3B','3D','4A','4B','4D','5A','5B','5D','6A','6B','6D','7A','7B','7D']
+

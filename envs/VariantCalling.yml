@@ -1,0 +1,9 @@
+name: BCFtoolsVariantCalling
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - bcftools =1.15
+  - samtools =1.15
+  - picard =3.1.1
+  - bwa-mem2 =2.2.1
