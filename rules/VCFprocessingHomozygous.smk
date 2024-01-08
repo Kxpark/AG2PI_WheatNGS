@@ -64,4 +64,4 @@ rule Done:
     output:
         "Done.txt"
     script:
-       "scripts/Done.py"
+       "../scripts/Done.py"

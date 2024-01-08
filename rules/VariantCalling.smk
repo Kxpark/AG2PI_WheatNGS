@@ -85,8 +85,8 @@ rule coverage:
 
 rule Split_Chromosome:
     input:
-        "Done_Bam/{sample}.bam",
-        "Done_Bam/{sample}.bam.csi"
+        bam="Done_Bam/{sample}.bam",
+        index="Done_Bam/{sample}.bam.csi"
     output:
         "Split_Bam/{sample}.{Chr}.bam"
     params:
@@ -94,12 +94,20 @@ rule Split_Chromosome:
     conda:
         "../envs/VariantCalling.yml" 
     shell:
-        "samtools view -b -o {output} {input} {wildcards.Chr}"
+        "samtools view -b -o {output} {input.bam} {wildcards.Chr}"
 
-
+rule inputgenerator:
+    input: 
+        expand("Split_Bam/{sample}.{{Chr}}.bam",sample=config['samples'])
+    output:
+        "Bamlists/Bamlist.{Chr}.txt"
+    run:
+        for f in input:
+            with open(output[0],'a') as out:
+                out.write(f+'\n') 
 rule Mpileup:
     input:
-        expand("Split_Bam/{sample}.{{Chr}}.bam",sample=config['samples'])            
+        "Bamlists/Bamlist.{Chr}.txt"            
     output:
         "Split_VCF/{Chr}.raw.vcf.gz"
     params:
@@ -107,7 +115,7 @@ rule Mpileup:
     conda:
         "../envs/VariantCalling.yml" 
     shell:
-        "bcftools mpileup -s {input} -f {params.ref} -q 20 -Ou | bcftools call -Oz -mv -o {output}"
+        "bcftools mpileup -b {input} -f {params.ref} -q 20 -Ou | bcftools call -Oz -mv -o {output}"
 
 
 rule Concat_Mpileup:
