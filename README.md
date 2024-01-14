@@ -45,7 +45,8 @@ Then follow the instructions for installation.
 Once you have miniforge/conda downloaded go ahead and build your Snakemake Environment.
 ```{bash }
 cd AG2PI_WheatNGS/
-conda env create -f /environment.yml -n VariantCallingSnakemake
+conda env create -f environment.yml -n VariantCallingSnakemake
+conda activate VariantCallingSnakemake
 ```
 If you have issues you can create a new conda environment, and make sure to load Snakemake, and Mamba packages. 
 Then the nested environments inside of the /envs directory will be autoloaded.
