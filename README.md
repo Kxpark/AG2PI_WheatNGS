@@ -1,4 +1,4 @@
-# Wheat NGS Variant Calling Snakemake Workflow <img align = "right" width = "220" src="https://github.com/Kxpark/AG2PI_WheatNGS/assets/104218928/8d2578cd-ed79-480c-842b-5019fb29a725">
+# NexGenSnake: Variant Calling Snakemake Workflow <img align = "right" width = "220" src="https://github.com/Kxpark/AG2PI_WheatNGS/assets/104218928/8d2578cd-ed79-480c-842b-5019fb29a725">
 
 A reproducible snakemake workflow that can be customized to fit your Next Gen-Sequencing projects.
 
