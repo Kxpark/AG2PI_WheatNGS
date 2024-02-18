@@ -29,7 +29,7 @@ This workflow can be used with personal NGS sequence data or scripts are include
 
 **1. Clone the git repository** 
 ```{bash}
-git clone https://github.com/Kxpark/AG2PI_WheatNGS.git
+git clone https://github.com/Kxpark/NexGenSnake.git
 ```
 
 **Do you already have Anaconda or Bioconda or Miniforge on your system?**
@@ -44,7 +44,7 @@ Then follow the instructions for installation.
 **2. Setting up the Environment**
 Once you have miniforge/conda downloaded go ahead and build your Snakemake Environment.
 ```{bash }
-cd AG2PI_WheatNGS/
+cd NexGenSnake/
 conda env create -f environment.yml -n VariantCallingSnakemake
 conda activate VariantCallingSnakemake
 ```
