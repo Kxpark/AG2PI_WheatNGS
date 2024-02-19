@@ -1,28 +1,21 @@
 #
 # Start-up General 
 #
-# =================================================================================================
-#     Import Libraries
-# =================================================================================================
-
-#import glob
-#import os
-#import json
-##import pandas as pd
-#import socket, platform
-#from snakemake.io import expand
-#from snakemake.utils import R
-#from snakemake.utils import min_version
-#from snakemake.utils import validate
-#from snakemake.io import glob_wildcards
-#import re
-#rom os.path import join, basename, dirname
-#import pathlib
-#rom os import path
-#from datetime import datetime
-
-
-def get_vcfs(wildcards):
-   return expand("Filt_VCF/{name}.missing{fmissing}_MAF{maf}_imputed.vcf.gz",name=config["Population"],fmissing=config['VCF_Filtering']['Percent_Missing']
-                ,maf=config['VCF_Filtering']['Minor_allele_frequency'])
-
+logger.info("#====================================================================================================#")
+logger.info("   __      __          _____            __          __          ______           ____    ____     ___ ")
+logger.info("  |   |   |   |     /   __   \         |   |       |   |       |   _  \          |   |   |   |   |   |")
+logger.info("  |   |   |   |     |   | |  |         |   |       |   |       |  |  \  \        \   |   |   |   |   |")
+logger.info("  |   |___|   |     |   | |  |         |   |       |   |       |  |   \  \         \  \__/  /    |   |")
+logger.info("  |    ___    |     |   | |  |         |   |   /\  |   |       |  |    |  |          |    |      |   |")
+logger.info("  |   |   |   |     |   | |  |         \   |  /  \ |   /       |  |    / /           |    |      |___|")
+logger.info("  |   |   |   |     |   |_|  |          \  \ / /\ \|  /        |  |___/ /            |    |       ___ ")
+logger.info("  |___|   |___|      \______ /           \____/  \___/         |_______/             |____|      |___|")
+logger.info("")
+logger.info("#====================================================================================================#")
+logger.info("")
+logger.info("        NexGenSnake: A Snakemake workflow for Variant Calling                                         ")
+logger.info("          Author: Kyle Parker                                                                         ")
+logger.info("          Github: Kxpark/NexGenSnake                                                                  ")
+logger.info("")
+logger.info("     This work is supported by funding from the Agricultural Genome to Phenome Initiative (AG2PI)     ")
+logger.info("                    which is funded by USDA-NIFA award 2022-70412-3845                                ")
