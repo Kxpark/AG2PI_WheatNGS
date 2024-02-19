@@ -21,7 +21,6 @@ This workflow can be used with personal NGS sequence data or scripts are include
 
 **Current issues** 
   1) With the size of the wheat genome, I am currently having issues uploading sample data or a reference genome that is already indexed (as the .tar file is over 80GB)
-  2) Along this issue even a very low-coverage GBS example sample line is too big. These issues will hopefully be resolved soon.
 
 
 ## Installation
