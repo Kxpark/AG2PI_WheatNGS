@@ -22,8 +22,14 @@ Reference_Genome:
 
 Population: WGS
 
+samples:
+  A: data/samples/A.
+  B: data/samples/B.
+  C: data/samples/C.
+
 SRA:
-  SRR8255599: 'Plant'
+  {samples:    ['SRR13572425','SRR13572416'],
+    cultivar:   ['ClaraCL','KS96WGRC40']}
 
 
 ##########################

@@ -3,8 +3,8 @@
 ##################################################
 rule Align_reads:
     input:
-        fastq1="data/samples/{sample}._1.fastq",
-        fastq2="data/samples/{sample}._2.fastq"
+        fastq1="data/samples/{sample}_1.fastq.gz",
+        fastq2="data/samples/{sample}_2.fastq.gz"
     output:
         "Aligned_Sorted_BAM/{sample}.bam"
     conda:
@@ -12,7 +12,7 @@ rule Align_reads:
     log:
         "logs/Align_reads/{sample}.log"
         
-    threads: 12
+    threads: 11
     params:
         index=config["Reference_Genome"]['index']
     shell:
@@ -96,15 +96,22 @@ rule Split_Chromosome:
     shell:
         "samtools view -b -o {output} {input.bam} {wildcards.Chr}"
 
+def sraSamples2(wildcards):
+    if config['Workflow_Settings']['SRApull']:
+        return ["Split_Bam/"+file + ".{Chr}.bam" for file in config['SRA']['samples']]
+    else:
+        return ["Split_Bam/"+file + ".{Chr}.bam" for file in config['samples']]
+
 rule inputgenerator:
     input: 
-        expand("Split_Bam/{sample}.{{Chr}}.bam",sample=config['samples'])
+        sraSamples2
     output:
         "Bamlists/Bamlist.{Chr}.txt"
     run:
         for f in input:
             with open(output[0],'a') as out:
-                out.write(f+'\n') 
+                out.write(f + '\n') 
+
 rule Mpileup:
     input:
         "Bamlists/Bamlist.{Chr}.txt"            
@@ -129,5 +136,3 @@ rule Concat_Mpileup:
     threads: 48
     shell:
         "bcftools concat --threads {threads} -Oz -o {output} {input}"
-
-
