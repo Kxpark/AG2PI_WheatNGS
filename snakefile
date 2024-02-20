@@ -6,7 +6,7 @@ configfile: "config.yaml"
 ##############################################
 #  Load Rules
 ##############################################
-#include:"rules/Background.smk"
+include:"rules/Background.smk"
 
 if config['Workflow_Settings']['IndexReference']:
     include: "rules/IndexReference.smk"

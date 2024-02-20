@@ -27,9 +27,10 @@ rule Beagle_Impute:
     conda:
         "../envs/VCFprocessing.yml" 
     params:
-        prefix='Final_VCF/Imputed/{name}.missing{fmissing}_imputed'    
+        prefix='Final_VCF/Imputed/{name}.missing{fmissing}_imputed',
+        maxmem=config['Beagle']['Max_mem']    
     shell:
-        "beagle gt={input} out={params.prefix}"        
+        "beagle -Xmx{params.maxmem} gt={input} out={params.prefix}"        
 
 rule VCF_filt_2:
     input:
