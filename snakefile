@@ -8,6 +8,8 @@ configfile: "config.yaml"
 ##############################################
 include:"rules/Background.smk"
 
+if config['Workflow_Settings']['DownloadRef']:
+    include: "rules/DownloadReference.smk"
 if config['Workflow_Settings']['IndexReference']:
     include: "rules/IndexReference.smk"
 if config['Workflow_Settings']['SRApull']:

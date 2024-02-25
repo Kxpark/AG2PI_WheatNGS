@@ -4,28 +4,28 @@ Workflow_Settings:
   # Do you want to pull fastqs by using SRA-toolkit?
   SRApull: FALSE
  # Do you need to download/index your reference genome?
+  DownloadRef: FALSE
   IndexReference: FALSE
 # Do you want to filter your variants after initial call?
   VariantFiltering: TRUE
   Homozygous: TRUE
 
 # If not using SRApull, please list your sample names.
-samples:
-  A: data/samples/A.
-  B: data/samples/B.
-  C: data/samples/C.
 
 Reference_Genome:
-  ref: data/ref/genome.fa
-  index: data/ref/genome
-  Url: https://urgi.versailles.inrae.fr/download/iwgsc/IWGSC_RefSeq_Assemblies/v2.1/iwgsc_refseqv2.1_assembly.fa.zip
+  ref: data/ref/DemoRef.fa.gz
+  index: data/ref/DemoRef
+  Url: 
+  #Reference Chinese Spring V2.1 option to download.
+  #ref: data/ref/genome.fa
+  #index: data/ref/genome
+  #Url: https://urgi.versailles.inrae.fr/download/iwgsc/IWGSC_RefSeq_Assemblies/v2.1/iwgsc_refseqv2.1_assembly.fa.zip
 
 Population: WGS
 
 samples:
-  A: data/samples/A.
-  B: data/samples/B.
-  C: data/samples/C.
+  DemoTAM111: data/samples/DemoTAM111
+  DemoTAM112: data/samples/DemoTAM112
 
 SRA:
   {samples:    ['SRR13572425','SRR13572416'],
