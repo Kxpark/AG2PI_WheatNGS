@@ -19,9 +19,6 @@ This the first draft of the workflow, so feedback is welcome! Over time it will 
 
 This workflow can be used with personal NGS sequence data or scripts are included to use SRA-toolkit to download sequence data from NCBI. Options in the Config file can be adjusted to best fit your project goals.
 
-**Current issues** 
-  1) With the size of the wheat genome, I am currently having issues uploading sample data or a reference genome that is already indexed (as the .tar file is over 80GB)
-
 
 ## Installation
 
