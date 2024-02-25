@@ -10,10 +10,13 @@ include:"rules/Background.smk"
 
 if config['Workflow_Settings']['DownloadRef']:
     include: "rules/DownloadReference.smk"
+
 if config['Workflow_Settings']['IndexReference']:
     include: "rules/IndexReference.smk"
+
 if config['Workflow_Settings']['SRApull']:
     include: "rules/SRApull.smk"
+    
 include: "rules/VariantCalling.smk"
 
 if config['Workflow_Settings']['VariantFiltering']:

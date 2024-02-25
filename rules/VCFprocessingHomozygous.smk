@@ -1,12 +1,15 @@
 ################################
 #  Filtering/Imputing VCF 
 ################################
+
 def get_vcfs(wildcards):
    return expand("Filt_VCF/{name}.missing{fmissing}_MAF{maf}_imputed.vcf.gz",name=config["Population"],fmissing=config['VCF_Filtering']['Percent_Missing']
                 ,maf=config['VCF_Filtering']['Minor_allele_frequency'])
 
+
 wildcard_constraints:
         name=config["Population"]
+
 
 rule Remove_Het:
     input:

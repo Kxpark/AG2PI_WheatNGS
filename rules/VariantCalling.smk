@@ -102,6 +102,7 @@ def sraSamples2(wildcards):
     else:
         return ["Split_Bam/"+file + ".{Chr}.bam" for file in config['samples']]
 
+
 rule inputgenerator:
     input: 
         sraSamples2
