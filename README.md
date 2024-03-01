@@ -1,6 +1,9 @@
 # NexGenSnake: Variant Calling Snakemake Workflow <img align = "right" width = "220" src="https://github.com/Kxpark/AG2PI_WheatNGS/assets/104218928/8d2578cd-ed79-480c-842b-5019fb29a725">
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10702519.svg)](https://doi.org/10.5281/zenodo.10702519)
+
 A reproducible snakemake workflow that can be customized to fit your Next Gen-Sequencing projects.
+
 
 First things first, This work is supported by funding from the Agricultural Genome to Phenome Initiative (AG2PI),
  which is funded by USDA-NIFA award 2022-70412-3845. <img align = "bottom" width = "110" src="https://github.com/Kxpark/AG2PI_WheatNGS/assets/104218928/1a214335-e1f1-407f-8d13-9b27ffb848a0">
