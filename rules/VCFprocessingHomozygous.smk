@@ -3,8 +3,7 @@
 ################################
 
 def get_vcfs(wildcards):
-   return expand("Filt_VCF/{name}.missing{fmissing}_MAF{maf}_imputed.vcf.gz",name=config["Population"],fmissing=config['VCF_Filtering']['Percent_Missing']
-                ,maf=config['VCF_Filtering']['Minor_allele_frequency'])
+        return expand("Filt_VCF/{name}.missing{fmissing}_MAF{maf}_imputed.vcf.gz",name=config["Population"],fmissing=config['VCF_Filtering']['Percent_Missing'],maf=config['VCF_Filtering']['Minor_allele_frequency'])
 
 
 wildcard_constraints:
@@ -13,27 +12,28 @@ wildcard_constraints:
 
 rule Remove_Het:
     input:
-        expand("Final_VCF/{name}.raw.vcf.gz",name=config["Population"])
+        "Final_VCF/{name}.raw.vcf.gz"
     output:
         "Final_VCF/{name}.homozy.vcf.gz"
     conda:
-        "../envs/VCFprocessing.yml" 
+        "../envs/VCFprocessing.yml"
     shell:
         "bcftools view {input} | sed 's#0/1#./.#g' | bcftools view -Oz -o {output}"
 
-rule VCF_filt_1:
+
+rule VCF_filt1:
     input:
-        "Final_VCF/{name}.homozy.vcf.gz"
+        expand("Final_VCF/{name}.homozy.vcf.gz",name=config["Population"])
     output:
-        "Final_VCF/Filter_VCF/{name}.missing{fmissing}.vcf.gz"
+        expand("Final_VCF/Filter_VCF/{name}.missing{fmissing}.vcf.gz",name=config["Population"],fmissing=config['VCF_Filtering']['Percent_Missing'])
     conda:
         "../envs/VCFprocessing.yml" 
     params:
-        name=config["Population"],
         fmissing=config['VCF_Filtering']['Percent_Missing'],
         Qual=config['VCF_Filtering']['Minimum_Quality']
     shell:
         "bcftools view -i 'F_MISSING<{params.fmissing} && QUAL>={params.Qual}' -Oz -o {output} {input}"
+
 
 rule Beagle_Impute:
     input:
@@ -43,10 +43,11 @@ rule Beagle_Impute:
     conda:
         "../envs/VCFprocessing.yml" 
     params:
-        prefix='Final_VCF/Imputed/{name}.missing{fmissing}_imputed'    
+        prefix='Final_VCF/Imputed/{name}.missing{fmissing}_imputed',    
         maxmem=config['Beagle']['Max_mem']    
     shell:
         "beagle -Xmx{params.maxmem} gt={input} out={params.prefix}"         
+
 
 rule VCF_filt_2:
     input:
@@ -61,6 +62,7 @@ rule VCF_filt_2:
         "logs/VCFfiltering/Filt2{name}.missing{fmissing}_{maf}.log"
     shell:
         "bcftools view -i 'MAF[0]>{params.maf}' -Oz -o {output} {input} 2> {log}"
+
 
 rule Done:
     input:

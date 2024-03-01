@@ -1,27 +1,22 @@
-
-
 Workflow_Settings:
+    # Do you need to download/index your reference genome?
+    DownloadRef: TRUE
   # Do you want to pull fastqs by using SRA-toolkit?
-  SRApull: FALSE
- # Do you need to download/index your reference genome?
-  DownloadRef: FALSE
-  IndexReference: FALSE
+    SRApull: FALSE
 # Do you want to filter your variants after initial call?
-  VariantFiltering: TRUE
-  Homozygous: TRUE
+    VariantFiltering: TRUE
+    Homozygous: TRUE
 
-# If not using SRApull, please list your sample names.
+#Set the name of your population
+Population: Demo
 
 Reference_Genome:
-  ref: data/ref/DemoRef.fa.gz
-  index: data/ref/DemoRef
-  Url: 
-  #Reference Chinese Spring V2.1 option to download.
-  #ref: data/ref/genome.fa
-  #index: data/ref/genome
-  #Url: https://urgi.versailles.inrae.fr/download/iwgsc/IWGSC_RefSeq_Assemblies/v2.1/iwgsc_refseqv2.1_assembly.fa.zip
-
-Population: WGS
+  {ref: ['data/ref/DemoRef.fa.gz'],
+  index: ['data/ref/DemoRef'],
+  Url: [],
+  Chromosomes: ['1ATest','2ATest']}
+  
+# Place your user inputed samples like the Demo samples bellow.
 
 samples:
   DemoTAM111: data/samples/DemoTAM111
@@ -31,6 +26,12 @@ SRA:
   {samples:    ['SRR13572425','SRR13572416'],
     cultivar:   ['ClaraCL','KS96WGRC40']}
 
+  #Reference Chinese Spring V2.1 option to download.
+  #{ref: ['data/ref/iwgsc_refseqv2.1_assembly.fa'],
+  #index: ['data/ref/iwgsc_refseqv2.1_assembly'],
+  #Url: ['https://urgi.versailles.inrae.fr/download/iwgsc/IWGSC_RefSeq_Assemblies/v2.1/iwgsc_refseqv2.1_assembly.fa.zip'],
+  #Zipfile: ['iwgsc_refseqv2.1_assembly.fa.zip'],
+  #Chromosomes: ['Chr1A','Chr1B','Chr1D','Chr2A','Chr2B','Chr2D','Chr3A','Chr3B','Chr3D','Chr4A','Chr4B','Chr4D','Chr5A','Chr5B','Chr5D','Chr6A','Chr6B','Chr6D','Chr7A','Chr7B','Chr7D']}
 
 ##########################
 # Tool Parameters
@@ -48,8 +49,6 @@ VCF_Filtering:
   Percent_Missing: [.2]
   Minor_allele_frequency: 0.05
   Minimum_Quality: 40
+
 Beagle:
-  Max_mem: 80g
-
-Chromosomes: ['1A','1B','1D','2A','2B','2D','3A','3B','3D','4A','4B','4D','5A','5B','5D','6A','6B','6D','7A','7B','7D']
-
+  Max_mem: 40g

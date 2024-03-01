@@ -1,10 +1,26 @@
 ##################################################
 # BWA-mem2 to BCFtools Variant Calling Pipeline
 ##################################################
+rule BWA_index:
+    input: 
+        ref=config['Reference_Genome']['ref']
+    output:
+        expand("{Genome}.{ends}", Genome=config['Reference_Genome']['index'], ends=['0123','amb','ann','bwt.2bit.64','pac'])
+    conda:
+        "../envs/VariantCalling.yml"
+    log:
+        "logs/IndexRef/index.log"
+    params:
+        prefix=config['Reference_Genome']['index']
+    shell:
+        "(bwa-mem2 index -p {params.prefix} {input.ref}) 2> {log}"
+
+
 rule Align_reads:
     input:
         fastq1="data/samples/{sample}_1.fastq.gz",
-        fastq2="data/samples/{sample}_2.fastq.gz"
+        fastq2="data/samples/{sample}_2.fastq.gz",
+        index=expand("{Genome}.{ends}", Genome=config['Reference_Genome']['index'], ends=['0123','amb','ann','bwt.2bit.64','pac'])
     output:
         "Aligned_Sorted_BAM/{sample}.bam"
     conda:
@@ -38,7 +54,9 @@ rule Mark_Dupplicates:
     log:
         "logs/Dupstats/Dupstats.{sample}.txt"
     shell:
-        "picard MarkDuplicates I={input} O={output} M={log}"
+        """
+        picard MarkDuplicates I={input} O={output} M={log}
+        """
 
 rule Read_Groups:
     input:
@@ -90,7 +108,7 @@ rule Split_Chromosome:
     output:
         "Split_Bam/{sample}.{Chr}.bam"
     params:
-        Chr=config['Chromosomes']
+        Chr=config['Reference_Genome']['Chromosomes']
     conda:
         "../envs/VariantCalling.yml" 
     shell:
@@ -128,7 +146,7 @@ rule Mpileup:
 
 rule Concat_Mpileup:
     input:
-        expand("Split_VCF/{Chr}.raw.vcf.gz",Chr=config['Chromosomes'])
+        expand("Split_VCF/{Chr}.raw.vcf.gz",Chr=config['Reference_Genome']['Chromosomes'])
 
     output:
         expand("Final_VCF/{name}.raw.vcf.gz",name=config["Population"])

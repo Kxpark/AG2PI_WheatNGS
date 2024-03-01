@@ -4,3 +4,4 @@ channels:
   - bioconda
 dependencies:
   - snakemake-minimal >=8.5
+  - mamba

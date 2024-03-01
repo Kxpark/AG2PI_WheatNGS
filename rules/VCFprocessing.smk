@@ -2,8 +2,9 @@
 #  Filtering/Imputing VCF #not homozygous
 ################################
 def get_vcfs(wildcards):
-   return expand("Filt_VCF/{name}.missing{fmissing}_MAF{maf}_imputed.vcf.gz",name=config["Population"],fmissing=config['VCF_Filtering']['Percent_Missing']
-                ,maf=config['VCF_Filtering']['Minor_allele_frequency'])
+   return expand("Filt_VCF/{name}.missing{fmissing}_MAF{maf}_imputed.vcf.gz",name=config["Population"],fmissing=config['VCF_Filtering']['Percent_Missing'],maf=config['VCF_Filtering']['Minor_allele_frequency'])
+
+
 
 rule VCF_filt_1:
     input:
@@ -52,4 +53,4 @@ rule Done:
     output:
         "Done.txt"
     script:
-       "scripts/Done.py"
+       "../scripts/Done.py"

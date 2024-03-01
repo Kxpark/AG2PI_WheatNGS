@@ -2,31 +2,21 @@
 #  Download Reference Genome and Index for BWA-MEM2
 ###################################################
 rule Download_Reference:
-    input:
-        config['Reference_Genome']['Url']
     output:
-        "/data/ref/{file}.zip"
+        expand("data/ref/{file}",file=config['Reference_Genome']['Zipfile'])
     conda:
         "../envs/IndexReference.yml"
+    params:
+        url=config['Reference_Genome']['Url']
     shell:
-        "wget {input}"
+        "wget -P data/ref {params.url}"
 
 rule unzip:
     input:
-        "/data/ref/{file}.zip"
+        expand("data/ref/{file}",file=config['Reference_Genome']['Zipfile'])
     output:
-        "/data/ref/{file}.fa"
+        config['Reference_Genome']['ref']
     conda:
         "../envs/IndexReference.yml"
     shell:
-        "unzip {input}"
-
-rule Gzip:
-    input:
-        "/data/ref/{file}.fa"
-    output:
-        "/data/ref/{file}.fa.gz"
-    conda:
-        "../envs/IndexReference.yml"
-    shell:
-        "gzip {input}"
+        "unzip -d data/ref {input}"

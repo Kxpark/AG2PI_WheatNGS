@@ -9,15 +9,12 @@ configfile: "config.yaml"
 include:"rules/Background.smk"
 
 if config['Workflow_Settings']['DownloadRef']:
-    include: "rules/DownloadReference.smk"
-
-if config['Workflow_Settings']['IndexReference']:
-    include: "rules/IndexReference.smk"
+    include:"rules/DownloadReference.smk"
 
 if config['Workflow_Settings']['SRApull']:
-    include: "rules/SRApull.smk"
-    
-include: "rules/VariantCalling.smk"
+    include:"rules/SRApull.smk"
+  
+include:"rules/VariantCalling.smk"
 
 if config['Workflow_Settings']['VariantFiltering']:
     
@@ -39,12 +36,9 @@ onstart:
     try:
         needed_files=[]
         print("Checking to make sure all required files are here....")
-        if not config['Workflow_Settings']['IndexReference']:
-            needed_files= needed_files + ["data/ref/*.0123",
-                            "data/ref/*.amb",
-                            "data/ref/*ann",
-                            "data/ref/*.bwt.2bit.64",
-                            "data/ref/*.pac"]
+        if not config['Workflow_Settings']['DownloadRef']:
+            needed_files= needed_files + config['Reference_Genome']['ref']
+            
         if not config['Workflow_Settings']['SRApull']:
             for sample in config['samples']:
                 file= sample + '.fastq.gz'
